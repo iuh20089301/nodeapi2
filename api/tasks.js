@@ -87,4 +87,30 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// API để lấy số liệu công việc theo tháng
+router.get('/stats', (req, res) => {
+    const userId = req.query.user_id; // Lấy user_id từ yêu cầu
+    const month = req.query.month; // Lấy tháng từ yêu cầu (YYYY-MM)
+
+    const sql = `
+        SELECT 
+            COUNT(*) AS total_tasks,
+            SUM(CASE WHEN is_completed = 1 THEN 1 ELSE 0 END) AS completed_tasks,
+            SUM(CASE WHEN is_completed = 0 THEN 1 ELSE 0 END) AS pending_tasks
+        FROM tasks
+        WHERE user_id = ? AND DATE_FORMAT(thoigian, '%Y-%m') = ?`;
+
+    connection.query(sql, [userId, month], (err, results) => {
+        if (err) {
+            console.error('Có lỗi xảy ra khi truy vấn cơ sở dữ liệu:', err);
+            return res.status(500).send('Có lỗi xảy ra khi truy vấn cơ sở dữ liệu');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('Không có dữ liệu nào cho tháng này');
+        }
+        res.json(results[0]); // Trả về kết quả
+    });
+});
+
+
 module.exports = router; // Xuất router để sử dụng trong app.js
