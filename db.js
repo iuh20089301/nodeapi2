@@ -9,11 +9,11 @@ const connection = mysql.createConnection({
     // password: '',
     // database: 'mobi'
 
-    host: mysql.railway.internal,
-    port: 3306,
-    user: root,
-    password: TNrxGknzXQnnSjGPWcroakoMHtOIjaJd,
-    database: railway,
+    // host: mysql.railway.internal,
+    // port: 3306,
+    // user: root,
+    // password: TNrxGknzXQnnSjGPWcroakoMHtOIjaJd,
+    // database: railway,
 
     // free được ko bk bao giờ hết hạn, nhưng bị ngắt liên tục
     // host: 'sql.freedb.tech',
@@ -22,10 +22,10 @@ const connection = mysql.createConnection({
     // database: 'freedb_mobiquanly2'
 
     // dưới này là của free được liên tục vài ngày
-    // host: 'sql12.freesqldatabase.com',
-    // user: 'sql12745973',
-    // password: '4UP9bi4PsX',
-    // database: 'sql12745973'
+    host: 'sql12.freesqldatabase.com',
+    user: 'sql12750927',
+    password: 'WfSx9zHvwE',
+    database: 'sql12750927'
 });
 
 // Kiểm tra kết nối
